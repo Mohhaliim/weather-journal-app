@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 // Cors for cross origin allowance
 const cors = require('cors');
+const { response } = require('express');
 app.use(cors());
 // Initialize the main project folder
 app.use(express.static('website'));
@@ -26,17 +27,17 @@ function listening () {
 }
 
 //get is tested and working properly 
-app.get('/server.js', (req,res) => {  
+app.get('/all', (req,res) => {  
     res.send(projectData);  
 });
 
 // post mockup 
 
-app.post('/server.js',cors(),
-(req,res) =>
+app.post('/all',(req,res) =>
 {
     let data = req.body;
     projectData['temperature']= data.temperature;
     projectData['date']= data.date;
     projectData['userResponse']= data.userResponse;
+    res.send(projectData);
 });
